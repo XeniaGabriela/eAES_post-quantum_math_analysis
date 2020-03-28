@@ -1,5 +1,12 @@
 # eAES_post-quantum_math_analysis
 
+**A mathematical analysis of the symmetric cryptographic algorithm eAES**
+ 
+ This repository contains two versions of the published paper **Towards Post-Quantum Secure Symmetric Cryptography: A Mathematical Perspective**.
+ It is mathematical analysis of the symmetric cryptographic algorithm eAES wrt. post-quantum security and security against known classical attacks.
+ 
+## Content
+
 - [A mathematical analysis of the symmetric cryptographic algorithm eAES](#a-mathematical-analysis-of-the-symmetric-cryptographic-algorithm-eAES)
 - [Algorithm Designers](#algorithm-designers)
 - [Algorithm Analysis](#algorithm-analysis)
@@ -11,11 +18,6 @@
   - [ISO paper](#iso-paper)
 - [Analysis Results](#analysis-results)
   
-
-## A mathematical analysis of the symmetric cryptographic algorithm eAES
- 
- This repository contains two versions of the published paper **Towards Post-Quantum Secure Symmetric Cryptography: A Mathematical Perspective**.
- It is mathematical analysis of the symmetric cryptographic algorithm eAES wrt. post-quantum security and security against known classical attacks.
 
 
 ## Algorithm Designers
