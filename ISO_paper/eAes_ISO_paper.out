@@ -1,0 +1,30 @@
+\BOOKMARK [2][-]{Doc-Start}{Towards Post-Quantum Secure Symmetric Cryptography \(X. Bogomolec, J. G. Underhill, S. A. Kovac\)}{}% 1
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 2
+\BOOKMARK [1][-]{section.2}{The importance of symmetric post-quantum secure algorithms}{}% 3
+\BOOKMARK [1][-]{section.3}{Published attacks on AES}{}% 4
+\BOOKMARK [2][-]{subsection.3.1}{Mathematical structure of AES}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.2}{Attacks performed on binary devices}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Grover's search}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.4}{Quantum algebraic attack}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.5}{Consequences}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Rijndael, the base of eAES}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Computation grounds}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Rijndael algorithm architecture}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Basic Rijndael encryption functions}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Modifications for eAES}{}% 14
+\BOOKMARK [2][-]{subsection.5.1}{Rijndael inheritance}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.2}{More rounds and a 512-bit key version}{section.5}% 16
+\BOOKMARK [2][-]{subsection.5.3}{Say goodbye to 128- and 192-bit keys}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.4}{Replacing ExpandKey}{section.5}% 18
+\BOOKMARK [2][-]{subsection.5.5}{Pseudo Random Number Generators}{section.5}% 19
+\BOOKMARK [1][-]{section.6}{Key schedule variants}{}% 20
+\BOOKMARK [2][-]{subsection.6.1}{Common features}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.2}{HKDF}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.3}{cSHAKE}{section.6}% 23
+\BOOKMARK [1][-]{section.7}{Impact of Grover's Search Algorithm}{}% 24
+\BOOKMARK [2][-]{subsection.7.1}{Algorithm architecture}{section.7}% 25
+\BOOKMARK [2][-]{subsection.7.2}{Quantum resources and graph theory}{section.7}% 26
+\BOOKMARK [2][-]{subsection.7.3}{Quantum resources for the search}{section.7}% 27
+\BOOKMARK [2][-]{subsection.7.4}{Quantum resources for the ciphers}{section.7}% 28
+\BOOKMARK [1][-]{section.8}{Impact of Quantum Algebraic Attacks}{}% 29
+\BOOKMARK [1][-]{section.9}{Conclusion}{}% 30

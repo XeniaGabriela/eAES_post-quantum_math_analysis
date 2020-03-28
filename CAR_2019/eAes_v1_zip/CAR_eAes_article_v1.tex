@@ -1,0 +1,428 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{CAR}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{todo}
+
+\begin{document}
+\setcounter{footnote}{0}
+\setcounter{figure}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FOR THE EDITOR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\Abschnitt
+% Name der Rubrik
+{Rubrik}
+% Name der Rubrik (Inhaltsverzeichnis)
+{Rubrik}
+% Label fuer die Rubrik
+{rubrik}
+
+\vspace{3mm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FOR THE AUTHORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\Aufsatz
+% Title
+{Towards Post-Quantum Symmetric Cryptography}
+% Short title for the table of contents
+{Towards Post-Quantum Symmetric Cryptography}
+% Authors
+{S. A. Kovac, J. G. Underhill, X. Bogomolec}
+% Label of authors' names
+{NameAuthor}
+% Names and adresses
+{ Stiepan Aurélien Kovac, Master's Degree, ICT Security, Algorithm Design \\ John Gregory Underhill, Cryptographic C-Programmer, Algorithm Design\\ Dipl. Math. Xenia Bogomolec, Mathematical Analysis \\ }
+% Images of authors
+{./ITK.jpg}
+% E-Mails
+{stie@itk.swiss,john.underhill@protonmail.com,xb@quant-x-sec.com}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% IF THE ARTICLE IS WRITTEN IN ENGLISH, THEN UNCOMMENT
+% THE NEXT LINE AND ANOTHER LINE AT THE END OF THIS FILE
+\begin{otherlanguage}{english}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace{3mm}
+\begin{multicols}{2}
+\noindent
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% WRITE YOUR ARTICLE BELOW using \Ueberschrift \Ueberschriftu \begin{figurehead}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The command \Ueberschrift{Title}{label} produces a headline and new section
+\Ueberschrift{Introduction}{intro}
+\vspace{0.1cm}
+
+\noindent
+It is known since $1995$ that the security of currently used asymmetric cryptographic algorithms relying on the hardness of integer factorization and finding discrete logarithms (DLOG systems) will expire with the availability of potent enough quantum computers \cite{SHO}. By then, all private keys will be computable within reasonable time from the corresponding public keys. With the knowledge of those private keys, all encrypted data, which was collected and assigned to the relevant key exchanges, will no longer remain secret. \\
+
+\noindent
+With the advent of $49$ qubit processors quantum supremacy, the ability of quantum computing devices to solve problems that classical computers practically cannot solve,  lies within reach. IBM's $14$th quantum computer is its most powerful so far, a model with $53$ of the qubits that form the fundamental data-processing element at the heart of the system \cite{MSN}. Google participates in the race with their $72$-qubit quantum processor Bristlecone \cite{googleai}.  Furthermore, successful discoveries through research for topological quantum computation \cite{TQB} might create a verbatim "quantum leap" in quantum computation evolvement. \\
+
+\noindent
+For this reason, the NIST launched a standardization process on asymmetric post-quantum cryptography, by definition, cryptography which is resisting quantum computer attacks. The evaluated algorithms rely on hardness of mathematical problems other than integer factorization and DLOG. They run effectively on currently used binary devices and also offer security against current and evolving threats performed on potent binary devices.\\
+
+\Ueberschriftu{Post-quantum security for symmetric cryptography}
+
+\noindent
+Currently used symmetric cryptographic algorithms were generally still considered secure under the assumption of impracticality of formerly published attacks, e.g. the  \textit{related-key attack} \cite{HFE}. On the other hand,  published articles about the security of symmetric block ciphers with regards to quantum computing, such as \textit{Applying Grover’s algorithm to AES: quantum resource estimates} \cite{GRO} and a \textit{Quantum algorithms for boolean equation solving and quantum algebraic attack on cryptosystems} \cite{QAA}, demand new considerations regarding post-quantum security of symmetric ciphers such as \textsc{AES}. \textit{Grover's search algorithm} on \textsc{AES}-$256$ only requires $6681$ logical qubits according to the analysis in \cite{GRO}.\\
+
+\noindent
+As a consequence of the mentioned facts and events, we see the necessity of moving towards post-quantum security in symmetric cryptography as well. No asymmetric encryption within hybrid encryption systems can outbalance weaknesses of the symmetric part.\\
+
+\noindent
+Here we focus on a modification of the \textsc{Rjindael} cipher, which adresses attacks on the reversibility of the original key schedule function \cite{CRK, HFE}. Furthermore we implemented more rounds within the block encipherments to counter scaled system attacks. The chosen round parameter options from \textsc{Rjindael} for \textsc{AES} relied on considerations about efficiency of binary devices used almost $20$ years ago. the higher computation resources which come with our enhancements are easily compensated by performance of currently used devices.\\
+
+\noindent
+Furthermore our cooperation is a proof of concept for the fact that holistic technical cryptographic security can only be achieved by the compbination of deep industrial and scientific experience. Those properties are usually not unfified in one person. The highest quality of all aspects can be achieved by working in a team of experts with dedicated knowledge.\\
+
+\Ueberschriftu{Data units}
+
+\noindent
+We mainly talk about bits in terms of data units. It will make interrelations more obvious. Furthermore we can assume that 1 byte equals 8 bits in all algorithmic and digital contexts of this paper. So the synonymous usage of 1 byte as 8 bits is innocuous.  \\
+
+\Ueberschriftu{Invertibility vs. reversibility}
+
+\noindent
+"Invertible" stands for invertibility of a function in a mathematical sense, meaning that we have a bijective function. "Reversability" refers to computational aspects and can also include a brute force attack which can be executed successfully within reasonable time, such as finding the input data of a given hash value by trying all possible inputs. This can be done under suitable conditions with additional knowledge of the input data, such as its size, even though the hashing function is not even injective.\\
+
+% Recommendation of Quantum Flagship (\textsc{AES}-256) vs. preferred usage of \textsc{AES}-128 \\
+
+
+% The command \subsection{Title} produces a subsection
+\Ueberschrift{Inheritance and modifications}{inheritance and modifications}
+\vspace{0.1cm}
+
+\noindent
+\textsc{Rjindael} relies on a substitution-permutation network. It operates on a $4 \times 4$ column-major order array of the $128$ bits, called "the state". Columns of the matrix are also called "words". So each array entry consists of $8$ bits. Furthermore \textsc{Rijndael} uses the characteristic $2$ finite field with $256$ elements, the Galois field $GF (2^8) \cong \mathbb{F}_2 [x]/(1 + x^8 + x^4 + x^3 + x + 1 )$. For non-mathematicians, $\mathbb{F}_2$ represents the field represented by the set $\{0, 1 \}$ with addition and multiplication. The so-called reducing polynomial for computations, $x^8+x^4+x^3+x+1$, equals $0$ in $GF (2^8)$.\\
+
+\noindent
+\textsc{eAES} inherits the block size of \textsc{AES}, the basic encryption functions and the high level algorithm architecture of \textsc{Rjindael}. \\
+
+\noindent
+Our modifications affect the key schedule, which creates the series of round keys, as well as the number of rounds per version. Furthermore we implemented a version for a $512$-bit key, which is no outlier amongst post-quantum secure algorithm key sizes. \\
+
+\Ueberschriftu{\textsc{AES} block size}
+
+\noindent
+The block size in \textsc{eAES} remains he same as in \textsc{AES}, $16$ bytes, $128$ bits respectively. The original \textsc{Rjindael} algorithm includes a block size option of $256$ bits, which was not admitted for the \textsc{AES} standard. We decided to keep the $128$ bits for compatibility reasons with existing hardware implementations, even though several published attacks take advantage of the fact that \textsc{AES}-$256$ runs with the same block size as \textsc{AES}-$128$. Those vulnerabilities are at least mitigated in our algorithm by the higher number of rounds. \\ 
+
+\Ueberschriftu{Basic \textsc{Rjindael} encryption functions}
+
+\noindent
+Furthermore, we kept the $4$ basic functions of the \textsc{Rjindael} transformation within the encryption of each block: 
+
+\vspace{0.2cm}
+\begin{itemize} [noitemsep, nolistsep]
+  \item[1)] \textit{AddRoundKey} - addition in ${(\mathbb{F}_2)}^{128}$: \\ 
+  XOR-ing each byte of the state with a block of the round key.
+  \vspace{0.1cm}
+
+  \item[2)] \textit{SubBytes} - non-linear substitution: \\
+  Each byte is replaced by another according to the specified substitution table ($S$-Box). A more resource friendly option is to treat a state byte as an element $\alpha \in \mathbb{F}_2 [x]/(1 + x^8 + x^4 + x^3 + x + 1)$, where the multiplicative inverse of $\alpha$ (leaving 0 invariant) needs to be found.
+  \vspace{0.1cm}
+
+  \item[3)] \textit{ShiftRows} - transposition for diffusion: \\
+  The second, third and fourth row of the state are shifted to the left, by $1$, $2$ and $3$ steps.
+  \vspace{0.1cm}
+
+  \item[4)] \textit{MixColumns} - mixing for diffusion: \\
+  Mutiplication of each column of the state with the following matrix $M$:
+
+  $$ 
+  	M = 
+  	\begin{bmatrix}
+  		2 & 3 & 1 & 1 \\ 
+  	 	1 & 2 & 3 & 1 \\
+  	 	1 & 1 & 2 & 3 \\
+  	 	3 & 1 & 1 & 2 \\
+  	\end{bmatrix}
+  $$
+
+\end{itemize} 
+
+\vspace{0.2cm}
+\noindent
+All those basic functions are invertible. Furthermore all of them, except the \textit{SubBytes}, are linear. \\
+
+
+\Ueberschriftu{\textsc{Rjindael} algorithm architecture}
+
+\noindent
+\textsc{eAES} also inherits the high level algorithm architecture of \textsc{Rjindael} which is described by: \\
+
+\noindent
+Call the key schedule function \textit{ExpandKey}, and then call per block:
+\vspace{0.2cm}
+\begin{itemize} [noitemsep, nolistsep]
+  \item[1)] the initial round key addition \textit{AddRoundKey}
+  \item[2)] number of rounds - 1 of \textit{SubBytes}, \textit{ShiftRows}, \textit{MixColumns} and \textit{AddRoundKey}
+  \item[3)] the final round \textit{SubBytes}, \textit{ShiftRows} and \textit{AddRoundKey}
+\end{itemize}
+\vspace{0.5cm}
+
+\Ueberschriftu{PRNGs for key expansion, the essential modification}
+
+\noindent
+The original \textsc{Rjindael} key schedule expands the original key by applying the $S$-Box, left circular shifts and bitwise XOR-operations to the words in the state representation of the original key. We renounce on its exact description here, and will refer to other papers in the context of comparisons regarding quantum computing rescources. For now it is mostly important to note that the \textsc{Rjindael} key schedule function is invertible as well. This property opened the door for various attacks on the encryption and decryption processes, within which subkeys could be extracted, and the original key computed by applying the inverted key schedule function.\\
+
+\noindent
+Our chosen replacements are cryptographically secure PRNGs with strong diffusion properties. Including hashing algorithms as ingredients, they are not even injective, but produce a well defined output. These properties ensure security against all attacks on gained knowledge of round keys from round 2. Furthermore they are hardly reversible under foreseeable technical developments within the next decades. We will look at the chosen PRNGs more closely in a dedicated sections.\\
+
+\Ueberschriftu{More rounds and a 512-bit key version}
+
+\noindent
+Besides that, we increased the number of rounds taking in account recommendations of renowned cryptographers and cryptanalysts such as Bruce Schneier. The $256$-bit key variant \textsc{eAES}-$256$ runs $22$ rounds of the original \textsc{Rjindael} transformation function, which is $8$ more rounds than \textsc{AES}-$256$, and twice the best known attack which breaks $11$ rounds \cite{WEI}. For \textsc{eAES}-$512$ we chose the number of $30$ rounds. \\
+
+\Ueberschrift{Key schedule variants}{key schedule variants}
+\vspace{0.1cm}
+
+\noindent
+We consider cryptographic key derivation functions as appropriate replacements for the invertible \textsc{Rjindael} key schedule. Those functions are built for deriving keys of a fixed size for further cryptographic operations by using a chosen underlying pseudo random function. Our first choice is \textsc{HKDF}, a HMAC-based \textit{extract-and-expand key derivation function}. 
+As a second option, we implemented the \textsc{SHA}-$3$-derived and customizable \textsc{cSHAKE}-function. In both cases, we use \textsc{SHA-}hash-functions as underlying pseudo random functions. Due to the fact that within our algorithm, those functions expect an input which is cryptographically strong already, we renounce on the usage of a salt.\\
+
+
+\Ueberschriftu{Resolving the \textsc{AES} key length dilemma in the face of evolving technologies}
+
+\noindent
+With these replacements, we implement resistance against known attacks on the original key schedule. Even though attacks such as the  \textsc{related-key attack} and the  \textsc{related-subkey attack} \cite{HFE} weren’t considered practical due to possible countermeasures within an integrated key generation, they were often cited and put the advantage of \textsc{AES}-256 over \textsc{AES}-128 in question. \\
+
+\noindent
+On the other hand, organizations such as the NIST and the EU quantum flagship \cite{KPN} recommend to increase the key lengths of currently used cryptographic algorithms whenever possible. The resulting mental dilemma is sometimes resolved by focusing on other symmetric algorithms. But in many cases it takes time to establish newer algorithms in the IT-landscape. \textsc{DES} for example is still being used for international finance transactions in VPNs, even though it is officially declared insecure. \textsc{AES} is still globally widely used. For operational staff in IT the algorithm options very often simply come down to the question about what choices they have for establishing a confidential communication with a business or cooperation partner. \\ 
+
+
+\Ueberschriftu{Common features of the chosen variants}
+
+\noindent
+Both \textsc{HKDF} and \textsc{cSHAKE} produce arrays of bytes which are converted to big-endian ordered $32$-bit integers for the round keys. Each round key has the same size as the ciphers block size, namely $128$ bits. So the output of our key derivation functions needs to be of the size $(n + 1)\cdot 128$ bit, where $n$ represents the number of rounds. The $+ 1$ stands for the fact that \textit{AddRoundKey}  is called initially and finally at each block encryption.\\
+
+\Ueberschriftu{\textsc{HKDF}, a widely available PRNG}
+
+\noindent
+We consider the \textsc{HMAC}-based \textsc{HKDF} as a sensible intermediary solution for the derivation of the round keys, because it is already widely available and runs effectively on currently used devices. Naturally, we use \textsc{HKDF}(\textsc{SHA}-$256$) for \textsc{eAES}-$256$ and \textsc{HKDF}(\textsc{SHA}-$512$) for \textsc{eAES}-$512$. \\
+
+\noindent
+Both \textsc{SHA}-$256$ and \textsc{SHA}-$512$ are members of the \textsc{SHA}-$2$ function family. They use the \textsc{Merkle-Damgard} construction around an internal permutation which is an extended \textit{Feistel network}. \textsc{Merkle-Damgard} is a method of building collision-resistant cryptographic hash functions from collision-resistant one-way compression functions. \\ 
+
+\noindent
+\textsc{HKDF} generates cryptographically strong output key material of any desired length by repeatedly generating hash-blocks, concatenating them, and finally truncating the result to the desired length. 
+Each call to \textsc{HMAC} involves two calls to the chosen hash function, \textsc{SHA} in our case, to generate a pseudo-random $128$-bit block. \\
+
+\noindent
+So \textsc{SHA}-$256$ has to be called $\lceil\frac{(22+1)\cdot128}{256}\rceil=12$ times for \textsc{eAES}-$256$ and $\lceil\frac{(30+1)\cdot128}{256}\rceil=16$ times for \textsc{eAES}-$512$. \\
+
+\noindent
+If \textsc{SHA}-$512$ is used for a \textsc{HKDF} key expansion within \textsc{eAES}-$512$, it is called $\lceil\frac{(30+1)\cdot128}{512}\rceil=8$ times.\\
+
+
+\Ueberschriftu{\textsc{cSHAKE}, flexible hashing architecture}
+
+\noindent
+We implemented the \textsc{SHA}-$3$-derived and customizable \textsc{cSHAKE}-function as a second option for the key schedule. \textsc{cSHAKE} is designed for $128$- and $256$-bit security strength \cite{SHK}. \textsc{cSHAKE}$128$ uses \textsc{SHA3}-$256$, and \textsc{cSHAKE}$256$ is based on \textsc{SHA3}-$512$.\\
+
+\noindent
+\textsc{Keccak}, the \textsc{SHA}-$3$ competition finalist, was chosen by the NIST for its algorithmic unrelatedness from \textsc{SHA}-$256$, while offering flexibility and a comparable speed in computation. Additionally, the different algorithm architectures of \textsc{SHA}-$2$ and \textsc{SHA}-$3$ make it less likely that potential future cryptoanalytic breakthroughs might compromise the security of both hash function families.\\
+
+\noindent
+\textsc{Keccak} is a so called \textit{sponge function}. That means it is an algorithm with finite internal state, taking an input bit stream of any length and producing an output bit stream of any desired length. Its standardized version \textsc{SHA}-$3$ has four versions with fixed output lengths: \textsc{SHA3}-$224$, \textsc{SHA3}-$256$, \textsc{SHA3}-$384$ and \textsc{SHA3}-$512$. The algorithm's low-level primitives are boolean bitwise operations over $64$-bit words excluding additions. Avoiding operations which involve carry propagation, enhance performance on hardware implementations such as FPGA and ASIC.\\
+
+\noindent
+\textsc{cSHAKE} returns \textsc{SHA}-$3$ if only an input string and an output length are given, which is the case in our implementation. The initial state of \textsc{SHA}-$3$ is a $5 \times 5$ array of $64$-bit entries, $1600$ zero bits it total. The input is absorbed into the initialized state, and with each call to the inner permutation function of \textsc{Keccak}, rates of $(1600 - 2 \cdot n, \,\,  n \in \{ 128, 256 \})$ bits are returned. So \textsc{cSHAKE}$128$ returns $168$, and \textsc{cSHAKE}$256$ returns $136$ pseudo-random bytes per call. We choose \textsc{cSHAKE}$256$ for \textsc{eAES}-$256$ and \textsc{eAES}-$512$.\\
+
+\noindent
+For \textsc{eAES}-$256$ we have $\lceil\frac{(22+1) \cdot 128}{136 \cdot 8}\rceil=3$ calls to the permutation function, $+ 1$ call for the initial state.\\
+
+\noindent
+For \textsc{eAES}-$512$ we have $\lceil\frac{(30+1)\cdot128}{136 \cdot 8}\rceil=4$ calls to the permutation function, $+ 1$ call for the initial state. \\
+
+\noindent
+Note that here we are talking about calls to the inner permutation function of \textsc{Keccak}, while we are talking about calls to \textsc{SHA}-$2$ itself in the previous section. Fewer calls of the permutation function lead to higher efficiency of \textsc{cSHAKE} compared to the one of \textsc{HKDF}. On the other hand, \textsc{Keccak} is prone to quantum algebraic attacks \cite{QAA}. The complexity of finding a solution to the systems of \textsc{Keccak}-$256$ and  \textsc{Keccak}-$512$ comes down to $2^{78.25}c\kappa$, where $c$ is a constant and $\kappa$ the condition number. We will look a little closer at the impact of \cite{QAA} on our complete algorithm in section $5$.\\
+
+
+
+\Ueberschrift{Impact of Grover's Search Algorithm}{Grover}
+\vspace{0.1cm}
+
+\noindent
+The square root speed-up offered by Grover’s algorithm \cite{GRV} over a classical exhaustive key search seems to be one of the most relevant quantum cryptanalytic impact for the study of block ciphers. The authors of \cite{GRO} present quantum circuits to implement an exhaustive key search for \textsc{AES} and analyze the quantum resources required to carry out such an attack for key sizes of $128$, $192$ and $256$ bits. For \textsc{AES}-$256$ their identified approximate quantum resources are summarized in the list below. The exact computations are presented in their paper. \\
+
+\Ueberschriftu{Required quantum resources}
+
+\noindent
+Quantum resources are represented by logical qubits (circuits), gates (elementary quantum operations) and depth (repetition of operations). The sum of required gates also represent the complexity of an algorithm.\\
+
+\begin{itemize} [noitemsep, nolistsep]
+
+  \item[1)] $128$ qubits to hold the current internal state 
+  \vspace{0.1cm}
+
+  \item[2)] \textit{ExpandKey}: $> 50'000$ gates and a depth of $> 24^{\prime}000$ on $512$ qubits for storage and ancillae.
+  \vspace{0.1cm}
+
+  \item[3)] \textit{AES rounds}: $64$ uncontrolled NOT gates for addition by flipping bits or else $128$ CNOT gates and $128$ qubits for the initial round.
+  \vspace{0.1cm}
+
+  \begin{itemize} [noitemsep, nolistsep]
+    \item[a)] \textit{AddRoundKey}: Current round key on $128$ wires and $128$ CNOT gates for parallel bit-wise XOR-ing
+    \vspace{0.1cm}
+
+    \item[b)] \textit{SubBytes}: The computation of a byte substitution requires$> 20^{\prime}000$ gates using only $9$ qubits. This is performed $16$ times per round, requiring $384$ auxiliary qubits for all to be done simultaneously. Otherwise $24$ auxiliary and $640$ storage qubits with a maximum depth of $8$ are required to compute $14$ rounds. 
+    \vspace{0.1cm}
+
+    \item[c)] \textit{ShiftRows}: No extra gates are necessary to implement this operation as it corresponds to a permutation of the qubits. $664$ qubits are needed to compute $14$ rounds.
+    \vspace{0.1cm}
+
+    \item[d)] \textit{MixColumns}: $277$ gates and a total depth of $39$ to operate on an entire column of the state on $32$ qubits at a time.
+
+  \end{itemize}
+
+\end{itemize}
+
+\vspace{0.5cm} 
+\noindent
+These  resources result in the costs of $> 3.5$ million gates, a depth of about $200'000$, and $1'336$ qubits to achieve the output of each \textsc{AES}-$256$ system. Quantum resource estimates for Grover’s algorithm to attack \textsc{AES}-$256$ are $3.24 \cdot 2^{151}$ gates, a depth of about $1.64 \cdot 2^{145}$, and $6'681$ qubits. \\
+
+\noindent
+The identification of required quantum computing resources for a brute force Grover's search on a fault-tolerant surface code based architecture on \textsc{SHA}-$256$ and \textsc{SHA3}-$256$ has been done in \cite{QSH}. It costs $1.27 \cdot 10^{44}$ T-gates, a depth of about $3.76 \cdot 10^{43}$, and $3615$ qubits. For \textsc{SHA3}-$256$ the costs are $2.71 \cdot 10^{44}$ T-gates, a depth of about $2.31 \cdot 10^{41}$, and $3615$ qubits. For both functions, the total cost comes down to approximately $2^{162}$ basic operations. \\
+
+\noindent
+Both \textsc{SHA}-$256$ and \textsc{SHA3}-$256$ are considerably more cost intensive in this context than the original \textsc{Rjindael} key schedule. The higher number of rounds for \textsc{eAES}-$256$ and the $512$-bit key version additionally mitigate the threat of Grover's search on \textsc{eAES}. The authors of \cite{GRO} recommended in $2015$ to move away from \textsc{AES}-$128$ when expecting the availability of at least a moderate size quantum computer. Our implementation excludes that option and offers higher security than \textsc{AES}-$256$. \\
+
+
+\Ueberschrift{Impact of Quantum Algebraic Attack}{quantum algebraic attack}
+\vspace{0.1cm}
+
+\noindent
+The authors of \cite{QAA} present an algorithm which leads to new considerations of the security of systems which can be reduced to solving \textit{boolean equations}. A solution $a$ for the equation $\mathcal{F} \cdot a = 0$ with a set of polynomials $\mathcal{F} \subset \mathbb{C}[X]$ is called \textit{boolean} if each coordinate of $a$ is either $0$ or $1$. Philosophically spoken we can say that finding a binary solution of a system with a by complex polynomials is the mathematical expression of the quantum principals applied to binary computations.\\
+
+\noindent
+The resulting \textit{quantum algebraic attack algorithm} includes quantum-monomial solving of polynomial systems over $\mathbb{C}$ by applying a \textit{Macauly linear system}. Like this they constructed a \textit{boolean equation solving algorithm} which decides if there is boolean solution, returns a boolean solution with a given probability, if there are such solutions to the system, and returns $\emptyset$ if no boolean solution exists. \\
+
+\noindent
+The runtime complexity of the resulting \textit{quantum algebraic attack} is considerably lower than the one of Grover's Search, but it depends on two factors: a constant $c$ and a condition number $\kappa$. The complexity of $2^{78.53}c\kappa^2$ for \text{AES}-$256$ is not much higher than the complexity of $2^{73.30}c\kappa^2$ for \text{AES}-$128$. We can assume that the complexity won't be much higher for $512$-bit key sizes, and it will also not considerably increased by the higher number of rounds in \textsc{eAES}.\\
+
+\noindent
+The conclusion of \cite{QAA} is, that systems which can be solved by \textit{boolean equation solving}, are only secure under \textit{quantum algebraic attack}, if the condition number $\kappa$ is large. The construction of such systems is a topic for further research. Besides \textsc{AES} and \textsc{Keccak}, stream ciphers such as \textsc{Trivium} an the multivariate public key cryptosystem \textsc{MPKC} are affected by the attack.\\
+
+
+\Ueberschrift{Conclusion}{conclusion}
+\vspace{0.1cm}
+
+\noindent
+The exact impact of our changes regarding a \textit{quantum algebraic attack} remains to be analyzed. But \textsc{eAES} is intended to be a transitional solution, a step towards post-quantum security. We consider \textsc{eAES} a sensible candidate for this purpose. It runs effectively on currently used devices, is compatible with existing hardware implementations and offers higher security under attacks within reach than \textsc{AES}.\\
+
+\noindent
+\textsc{eAES} will be proposed for an ISO-Standard. We hope to be able to contribute to a smooth transition into a new cryptographical era.
+
+
+\vspace{1cm}
+
+%%% For figures
+%\begin{figurehere}
+%  \centering
+%  \includegraphics[width=\columnwidth]{Abbildung}
+%  \caption{First figure of this article.\label{abb_1}}
+%\end{figurehere}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Literature
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{1}
+\itemsep=0cm plus 0pt minus 0pt
+
+\bibitem{SHO}
+P.~W.~Shor,
+\newblock Polynomial-Time Algorithms for Prime Factorization and Discrete Logarithms on a Quantum Computer,
+\newblock {\em https://arxiv.org/abs/quant-ph/9508027}, 1995.
+
+
+\bibitem{MSN}
+  S.~Shankland,
+  \newblock MSN News,
+  \newblock { \em https://www.msn.com/en-us/news/technology/ibms-new-53-qubit-quantum-computer-is-its-biggest-yet/ar-AAHtPaW}, September 2019.
+
+\bibitem{googleai}
+  J.~Kelly,
+  \newblock Google AI Blog,
+  \newblock {https://ai.googleblog.com/2018/03/a-preview-of-bristlecone-googles-new.html}, March 2018.
+
+\bibitem{TQB}
+  S.~Ran, C.~Eckberg, Q.-P.~Ding, Y.~Furukawa, T.~Metz, S.R.~Saha, I-L.~Liu, M.~Zic, H.~Kim, J.~Paglione and N.P.~Butch,
+  \newblock NIST events on paper of above authors,
+  \newblock { \em https://www.nist.gov/news-events/news/2019/08/newfound-superconductor-material-could-be-silicon-quantum-computers}.
+
+\bibitem{HFE}
+A.~Biryukov and D.~Khovratovich,
+\newblock Related-key Cryptanalysis of the Full AES-192 and AES-256,
+\newblock {\em https://eprint.iacr.org/2009/317.pdf}.
+
+
+\bibitem{GRO}
+M.~ Grassl, B.~ Langenberg, M.~ Roetteler, R.~ Steinwandt,
+\newblock Applying Grover’s algorithm to AES: quantum resource estimates,
+\newblock {\em https://arxiv.org/abs/1712.06239}, 2018.
+
+\bibitem{QAA}
+Yu-Ao Chen, Xiao-Shan Gao,
+\newblock Quantum Algorithms for Boolean Equation Solving and Quantum Algebraic Attack on Cryptosystems,
+\newblock {\em https://arxiv.org/abs/1712.06239}, 2018.
+
+\bibitem{WEI}
+A.~Biryukov, O.~Dunkelman, N.~Keller, D.~Khovratovich and A.~Shamir
+\newblock Key Recovery Attacks of Practical Complexityon AES-256 Variants With Up To 10 Rounds
+\newblock {\em http://www.wisdom.weizmann.ac.il/~orrd/crypt/PracticalAES256.pdf}.
+
+\bibitem{CRK}
+S.~Lucks,
+\newblock Attacking Seven Rounds of \textsc{Rjindael} under 192-bit an 256-bit Keys,
+\newblock {\em https://madoc.bib.uni-mannheim.de/10615/}, 2000.
+
+\bibitem{KPN}
+J.~Baloo, KPN,
+\newblock Everything is Quantum – The EU Quantum Flagship, 
+\newblock { \em https://2017.pqcrypto.org/conference/slides/baloo.pdf}, 2017.
+
+\bibitem{SHK}
+J.~Kelsey, S.~-j.~C.~R.~Perlner,
+\newblock SHA-3 Derived Functions: cSHAKE, KMAC, TupleHash and ParallelHash, 
+\newblock { \em https://nvlpubs.nist.gov/nistpubs/SpecialPublications
+/NIST.SP.800-185.pdf}, December 2016.
+
+\bibitem{GRV}
+L.~K.~Grover,
+\newblock A fast quantum mechanical algorithm for database search, 
+\newblock { \em Gary L. Miller, editor, Proceedings of the
+Twenty-Eighth Annual ACM Symposium on the Theory of Computing (STOC 1996), pages 212–219} ACM, 1996.
+
+\bibitem{QSH}
+M.~Amy, O.~Di Matteo, V.~Gheorghiu, M.~Mosca, A.~Parent, J.~Schanck,
+\newblock Estimating the cost of eneric quantum pre-image attacks on SHA-2 and SHA-3s, 
+\newblock { \em https://eprint.iacr.org/2016/992.pdf} QCrypt, 2016.
+
+
+  
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{multicols}
+
+
+%%% IF ENGLISH:
+\end{otherlanguage}
+%%%
+
+\end{document}
