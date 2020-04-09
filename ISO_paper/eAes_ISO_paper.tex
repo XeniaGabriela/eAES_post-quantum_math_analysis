@@ -66,7 +66,7 @@ For this reason, the NIST launched a standardization process on asymmetric post-
 \section{The importance of symmetric post-quantum secure algorithms}
 
 \noindent
-Hybrid encryption systems are used in all major crypto protocols: TLS, SSH and PGP. They combine the advantages of both cryptography classes. Symmetric protocols allow securely sharing a key via digital connections, and symmetric protocols are about $10^5 \times$ faster than asymmetric ones. The secret session key SK, which is limited in time, is shared via asymmetric cryptography, and the message itself is symmetrically encrypted with the securely shared session key.\\
+Hybrid encryption systems are used in all major crypto protocols: TLS, SSH and PGP. They combine the advantages of both cryptography classes. Asymmetric protocols allow securely sharing a key via digital connections, and symmetric protocols are about $10^5 \times$ faster than asymmetric ones. The secret session key SK, which is limited in time, is shared via asymmetric cryptography, and the message itself is symmetrically encrypted with the securely shared session key.\\
 
 \noindent
 No asymmetric encryption within hybrid encryption systems can outbalance weaknesses of the symmetric part. ISO currently makes it possible to standardize new symmetric cryptography algorithms and to amend existing ones. Therefore, we strive to establish \textsc{eAES} as an ISO-Standard. Its predecessor \textsc{AES} has been standardized by both organizations. \\
@@ -107,7 +107,7 @@ Various published attacks on \textsc{AES} \cite{HFE, WEI, CRK} take advantage of
 
 \subsection{Quantum algebraic attack}
 \noindent
-A harder impact on the security of \textsc{AES}-$256$ is posed by the quantum algebraic attack on cryptosystems which can be reduced to Boolean equation solving \cite{QAA}. this attack reduces security level of \textsc{AES}-$256$ from $256$ to $78.53$. The quantum algebraic attack is a classical cryptanalysis attack.
+A harder impact on the security of \textsc{AES}-$256$ is posed by the quantum algebraic attack on cryptosystems which can be reduced to Boolean equation solving \cite{QAA}. this attack reduces security level of \textsc{AES}-$256$ from $256$ to $\kappa \times 78.53$, where $\kappa$ is the condition number of the Boolean equation system. The quantum algebraic attack is a classical cryptanalysis attack.
 
 \subsection{Consequences}
 \noindent
