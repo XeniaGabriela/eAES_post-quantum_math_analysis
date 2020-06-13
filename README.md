@@ -57,6 +57,7 @@ The CAR version of the analysis contains an explanatory introduction to the IT-S
 
 The paper for the ISO standardization process of eAES: [ISO paper](https://eprint.iacr.org/2019/1208).
 
+
 ## Analysis Results
 
 You can read the results of the analysis wrt. the quantum attack **Grover's Search** in both published versions.
@@ -66,3 +67,5 @@ The analysis wrt.the Quantum Algebraic Attack is still ongoing. It is performed 
 * [Xenia Bogomolec](https://www.linkedin.com/in/xenia-bogomolec-532981a6/)
 
 ... and supported by other scientific experts, who will be mentioned after the peer review if they agree.
+
+Intermediary results of the ongoing research are regularly published on (https://github.com/XeniaGabriela/QAA_Condition_Nr/blob/master/official_paper/QAA_on_AES_paper.pdf)

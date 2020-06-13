@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.10)  9 APR 2020 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.10)  13 JUN 2020 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1579,7 +1579,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 206--208
 LaTeX Font Info:    Font shape `T1/ptm/bx/it' in size <12> not available
 (Font)              Font shape `T1/ptm/b/it' tried instead on input line 221.
 [4]
-<comparison.png, id=205, 941.5175pt x 415.5525pt>
+<comparison.png, id=206, 941.5175pt x 415.5525pt>
 File: comparison.png Graphic file (type png)
 <use comparison.png>
 Package pdftex.def Info: comparison.png  used on input line 232.
@@ -1605,7 +1605,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 256--259
 
  []
 
-<RHX-schematic.png, id=206, 521.95pt x 417.56pt>
+<RHX-schematic.png, id=207, 521.95pt x 417.56pt>
 File: RHX-schematic.png Graphic file (type png)
 <use RHX-schematic.png>
 Package pdftex.def Info: RHX-schematic.png  used on input line 265.
@@ -1630,7 +1630,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 279--281
 
  []
 
-<RSX-schematic.png, id=215, 600.2425pt x 419.5675pt>
+<RSX-schematic.png, id=216, 600.2425pt x 419.5675pt>
 File: RSX-schematic.png Graphic file (type png)
 <use RSX-schematic.png>
 Package pdftex.def Info: RSX-schematic.png  used on input line 284.
@@ -1660,7 +1660,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 318--320
 
  []
 
-<Toffoli.png, id=228, 1192.455pt x 409.53pt>
+<Toffoli.png, id=229, 1192.455pt x 409.53pt>
 File: Toffoli.png Graphic file (type png)
 <use Toffoli.png>
 Package pdftex.def Info: Toffoli.png  used on input line 323.
@@ -1785,65 +1785,87 @@ Underfull \hbox (badness 10000) in paragraph at lines 557--559
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 562--564
+Underfull \hbox (badness 10000) in paragraph at lines 560--562
 
  []
 
 [10]
-Underfull \hbox (badness 10000) in paragraph at lines 567--569
+Underfull \hbox (badness 10000) in paragraph at lines 563--564
 
  []
 
 
-Underfull \hbox (badness 1603) in paragraph at lines 601--604
+Underfull \hbox (badness 10000) in paragraph at lines 570--572
+
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 604--607
 []\T1/ptm/m/n/10.95 S. Ran, C. Eck-berg, Q.-P. Ding, Y. Fu-rukawa, T. Metz, S.R
 . Saha, I-L. Liu, M. Zic, H. Kim,
  []
 
 
-Underfull \hbox (badness 1033) in paragraph at lines 616--619
+Underfull \hbox (badness 1033) in paragraph at lines 619--622
 []\T1/ptm/m/n/10.95 A. Biryukov and D. Khovra-tovich,  Related-key Crypt-anal-y
 -sis of the Full AES-192 and AES-256,
  []
 
-
-Underfull \hbox (badness 5847) in paragraph at lines 652--655
+[11]
+Underfull \hbox (badness 5847) in paragraph at lines 660--663
 []\T1/ptm/m/n/10.95 C. Cid, In-for-ma-tion Se-cu-rity Group, Uni-ver-sity of Lo
 n-don,  Al-ge-braic Anal-y-sis of AES,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 657--660
+Underfull \hbox (badness 10000) in paragraph at lines 665--668
 []\T1/ptm/m/n/10.95 J. Baloo, KPN,  Ev-ery-thing is Quan-tum ^^U The EU Quan-tu
 m Flag-ship,
  []
 
-[11]
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--695
+[]\T1/ptm/m/n/10.95 P. Non-nen-mann and X. Bo-go-molec,  Com-plex-ity of the Qu
+an-tum Al-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--695
+\T1/ptm/m/n/10.95 ge-braic At-tack on AES: The Con-di-tion Num-ber of the Macau
+lay Ma-trix,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 691--695
+\T1/ptm/m/it/10.95 https://github.com/XeniaGabriela/QAA_Condition_Nr/blob/maste
+r/official_paper/QAA_on_AES_paper.pdf\T1/ptm/m/n/10.95 ,
+ []
+
 \tf@thm=\write10
 \openout10 = `eAes_ISO_paper.thm'.
 
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 691.
+(babel)             in language  on input line 705.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 691.
+(babel)             in language  on input line 705.
 Package babel Info: Redefining ngerman shorthand "|
-(babel)             in language  on input line 691.
+(babel)             in language  on input line 705.
 Package babel Info: Redefining ngerman shorthand "~
-(babel)             in language  on input line 691.
- [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 691.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 691.
+(babel)             in language  on input line 705.
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 705.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 705.
  (./eAes_ISO_paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 691.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 691.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 705.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 705.
 Package rerunfilecheck Info: File `eAes_ISO_paper.out' has not changed.
 (rerunfilecheck)             Checksum: D76FB8664183906208D3C736E613008B;2180.
  ) 
 Here is how much of TeX's memory you used:
- 26298 strings out of 492982
- 489925 string characters out of 6134896
- 585345 words of memory out of 5000000
- 29224 multiletter control sequences out of 15000+600000
+ 26302 strings out of 492982
+ 489951 string characters out of 6134896
+ 585397 words of memory out of 5000000
+ 29226 multiletter control sequences out of 15000+600000
  85683 words of font info for 88 fonts, out of 8000000 for 9000
  1144 hyphenation exceptions out of 8191
  55i,9n,75p,1023b,669s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1862,10 +1884,10 @@ e/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/urw/times/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times
 /utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on eAes_ISO_paper.pdf (12 pages, 328475 bytes).
+Output written on eAes_ISO_paper.pdf (12 pages, 331485 bytes).
 PDF statistics:
- 345 PDF objects out of 1000 (max. 8388607)
- 305 compressed objects within 4 object streams
- 67 named destinations out of 1000 (max. 500000)
+ 350 PDF objects out of 1000 (max. 8388607)
+ 310 compressed objects within 4 object streams
+ 69 named destinations out of 1000 (max. 500000)
  283 words of extra memory for PDF output out of 10000 (max. 10000000)
 
