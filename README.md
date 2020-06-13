@@ -66,6 +66,9 @@ The analysis wrt.the Quantum Algebraic Attack is still ongoing. It is performed 
 * [Dr. Peter Nonnenmann](https://www.linkedin.com/in/peter-dr-nonnenmann-737857a0/)
 * [Xenia Bogomolec](https://www.linkedin.com/in/xenia-bogomolec-532981a6/)
 
-... and supported by other scientific experts, who will be mentioned after the peer review if they agree.
+... and supported by 
+
+* Prof. Dr. Siegfried Rump (Head of the Institute for for Reliable Computing, TU Harburg)
+* Christoph Stockhammer, MathWorks
 
 Intermediary results of the ongoing research are regularly published on (https://github.com/XeniaGabriela/QAA_Condition_Nr/blob/master/official_paper/QAA_on_AES_paper.pdf)
