@@ -560,7 +560,7 @@ The conclusion of \cite{QAA} is, that systems which can be solved by Boolean equ
 \noindent
 The runtime complexity of the resulting quantum algebraic attack is considerably lower than the one of Grover's Search, but it depends on two factors: the complexity constant $c$ of the underlying \textsc{HHL} quantum algorithm \cite{HHL} and the condition number $\kappa$ of their specified Macaulay matrix from the involved polynomial system. The complexity of $2^{78.53}c\kappa^2$ for \text{AES}-$256$ is not much higher than the complexity of $2^{73.30}c\kappa^2$ for \text{AES}-$128$ due to the same block size of $128$ bit. \\
 
-We can assume that the complexity won't be much higher for $512$-bit key sizes, and it will also not considerably increased by the higher number of rounds in \textsc{eAES}. In the case of \textsc{eAES} we have a product of two various condition numbers, $\kappa_{AES}$ and $\kappa_{Keccak}$ instead of a quadratic factor $\kappa^2$. Both huge Macaulay matrices need to be generated explicitly to actually compute $\kappa_{AES}$ and $\kappa_{Keccak}$ to derive the complexity of the Quantum Algebraic Attack on eAES. The ongoing research project team regularly publishes results on Github \cite{XBO}.\\
+We can assume that the complexity won't be much higher for $512$-bit key sizes, and it will also not considerably increased by the higher number of rounds in \textsc{eAES}. In the case of \textsc{eAES} it has to be investigated if dedicated polynomial systems can be derived for the usage of either key schedule options, \textsc{HKDF} and \textsc{cSHAKE}. Both huge Macaulay matrices need to be generated explicitly to actually compute $\kappa_{AES}$ and $\kappa_{Keccak}$ to derive the complexity of the Quantum Algebraic Attack on eAES. The ongoing research project team regularly publishes results on Github \cite{XBO}.\\
 
 %check impact of rounds and key schedules!!!
 
@@ -568,7 +568,7 @@ We can assume that the complexity won't be much higher for $512$-bit key sizes, 
 \section{Conclusion}
 
 \noindent
-Considering the lower exponent of the highest power of $2$ in the total algorithm complexity, \textsc{eAES} offers a higher complexity of a factor $\geq 2^{277-151}=2^{126}$ regarding Grover's search algorithm compared to  \textsc{AES}, even if only the $256$-bit version is used. Regarding the quantum algebraic attacks, we can say that there is no attack outlined yet for the version with \textsc{HKDF}. Regarding the version with \textsc{cSHAKE}, the quantum algebraic attack has to be adapted to two phases: \textsc{Keccak} and then on the rounds functions. The complexity of such a solution remains to be investigated.\\
+Considering the lower exponent of the highest power of $2$ in the total algorithm complexity, \textsc{eAES} offers a higher complexity of a factor $\geq 2^{277-151}=2^{126}$ regarding Grover's search algorithm compared to  \textsc{AES}, even if only the $256$-bit version is used. Regarding the quantum algebraic attacks, it remains to be investigated if there are Boolean multivariate quadratic equations for both key schedule versions, \textsc{HKDF} and \textsc{cSHAKE}.\\
 
 \noindent
 We consider \textsc{eAES} a sensible candidate for a first generation post-quantum secure symmetric encryption. It runs effectively on currently used devices and is compatible with existing hardware implementations. We hope to be able to contribute to a smooth transition into the new post-quantum cryptographical era.
