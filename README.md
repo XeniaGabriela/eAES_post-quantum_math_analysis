@@ -56,7 +56,7 @@ The CAR version of the analysis contains an explanatory introduction to the IT-S
 ### ISO paper
 
 The paper for the ISO standardization process of eAES: [ISO paper](https://eprint.iacr.org/2019/1208).
-A second version, commit [c6d18dd](https://github.com/XeniaGabriela/eAES_post-quantum_math_analysis/blob/master/ISO_paper/eAes_ISO_paper.pdf) is going to be published in June 2020.
+
 
 ## Analysis Results
 
